@@ -39,7 +39,40 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    [
+      'nuxt-fire',
+      {
+        useOnly: [
+          'auth',
+          'firestore',
+          'functions',
+          'storage',
+          'realtimeDb',
+          'messaging'
+        ],
+        customEnv: false,
+        enableFirestorePersistence: false,
+        config: {
+          development: {
+            apiKey: 'AIzaSyDF1JKpnsF3tZxVlT5eBV3SNL1ShKmIx-E',
+            authDomain: 'quickcount-b10k2b.firebaseapp.com',
+            databaseURL: 'https://quickcount-b10k2b.firebaseio.com',
+            projectId: 'quickcount-b10k2b',
+            storageBucket: 'quickcount-b10k2b.appspot.com',
+            messagingSenderId: '710326215281'
+          },
+          production: {
+            apiKey: 'AIzaSyDF1JKpnsF3tZxVlT5eBV3SNL1ShKmIx-E',
+            authDomain: 'quickcount-b10k2b.firebaseapp.com',
+            databaseURL: 'https://quickcount-b10k2b.firebaseio.com',
+            projectId: 'quickcount-b10k2b',
+            storageBucket: 'quickcount-b10k2b.appspot.com',
+            messagingSenderId: '710326215281'
+          }
+        }
+      }
+    ]
   ],
   /*
    ** Axios module configuration
