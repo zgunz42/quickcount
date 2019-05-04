@@ -33,6 +33,6 @@ export default {
         voteCount: doc.data().earned_vote
       }))
     })
-  },
+  }
 }
 </script>
