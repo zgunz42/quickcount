@@ -1,16 +1,32 @@
 <template>
-  <div>
-    <b-media right-align vertical-align="center">
-      <b-img slot="aside" blank blank-color="#ccc" width="80" alt="placeholder"></b-img>
-
-      <h5 class="mt-0 mb-1">Media object</h5>
-      <p class="mb-0">
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus 
-        scelerisque ante sollicitudin.
-        Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. 
-        Fusce condimentum nunc ac
-        nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-      </p>
-    </b-media>
-  </div>
+  <b-container class="bv-example-row">
+    <b-row class="text-center">
+      <b-col cols="8">
+        <h2>{{ name }}</h2>
+        <p>Perolehan suara: {{ voteCount }}</p>
+      </b-col>
+      <b-col><VoteButton :doc-id="id"/></b-col>
+    </b-row>
+  </b-container>
 </template>
+<script>
+import VoteButton from '~/components/VoteButton.vue'
+
+export default {
+  components: { VoteButton },
+  props: {
+    id: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    voteCount: {
+      type: Number,
+      default: 0
+    }
+  }
+}
+</script>

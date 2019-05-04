@@ -1,27 +1,48 @@
 <template>
   <div>
     <ul class="list-unstyled">
-      <b-media tag="li">
-        <b-img slot="aside" blank blank-color="#abc" width="64" alt="placeholder"></b-img>
-
-        <h5 class="mt-0 mb-1">List-based media object</h5>
-        <p class="mb-0">
-          Cras sit amet nibh libero, in gravida nulla. 
-          Nulla vel metus scelerisque ante sollicitudin.
-          Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. 
-          Fusce condimentum nunc
-          ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </p>
-      </b-media>
+      <li v-for="item in items" :key="item.id">
+        <VoteItem
+          :id="item.id"
+          :name="item.name"
+          :vote-count="item.voteCount"
+        />
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import VoteItem from '~/components/VoteItem.vue'
+
 export default {
+  components: { VoteItem },
+  data: function() {
+    return {
+      items: [
+        {
+          id: 'as',
+          name: 'Jokowi',
+          voteCount: 12
+        },
+        {
+          id: 'asd',
+          name: 'Prabowo',
+          voteCount: 13
+        },
+        {
+          id: 'asasd',
+          name: 'Prabowo Adi',
+          voteCount: 13
+        }
+      ]
+    }
+  },
   methods: {
     async writeToFirestore() {
-      const messageRef = this.$fireStore.collection('candidates').doc('candidates')
+      const messageRef = this.$fireStore
+        .collection('candidates')
+        .doc('candidates')
       try {
         await messageRef.set({
           message: 'Nuxt-Fire with Firestore rocks!'
@@ -39,7 +60,6 @@ export default {
         alert(messageDoc.data().message)
       } catch (e) {
         alert(e)
-        return
       }
     }
   }
