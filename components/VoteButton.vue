@@ -1,5 +1,5 @@
 <template>
-  <b-button @click="$emit('vote', docId)">Vote</b-button>
+  <b-button @click="vote(docId)">Vote</b-button>
 </template>
 <script>
 export default {
@@ -11,7 +11,20 @@ export default {
     }
   },
   methods: {
-    vote: function(docId) {}
+    async vote(docId) {
+      /* eslint-disable no-console */
+      console.log('docId')
+      const messageRef = this.$fireStore.collection('candidates').doc(docId)
+      try {
+        const messageDoc = await messageRef.get()
+        await messageRef.set({
+          name: messageDoc.data().name,
+          earned_vote: messageDoc.data().earned_vote + 1
+        })
+      } catch (e) {
+        alert(e)
+      }
+    }
   }
 }
 </script>

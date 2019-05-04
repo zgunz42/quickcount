@@ -8,6 +8,7 @@
           :vote-count="item.voteCount"
         />
       </li>
+      <p>{{ text }}</p>
     </ul>
   </div>
 </template>
@@ -19,49 +20,19 @@ export default {
   components: { VoteItem },
   data: function() {
     return {
-      items: [
-        {
-          id: 'as',
-          name: 'Jokowi',
-          voteCount: 12
-        },
-        {
-          id: 'asd',
-          name: 'Prabowo',
-          voteCount: 13
-        },
-        {
-          id: 'asasd',
-          name: 'Prabowo Adi',
-          voteCount: 13
-        }
-      ]
+      text: '',
+      items: []
     }
   },
-  methods: {
-    async writeToFirestore() {
-      const messageRef = this.$fireStore
-        .collection('candidates')
-        .doc('candidates')
-      try {
-        await messageRef.set({
-          message: 'Nuxt-Fire with Firestore rocks!'
-        })
-      } catch (e) {
-        alert(e)
-        return
-      }
-      alert('Success.')
-    },
-    async readFromFirestore() {
-      const messageRef = this.$fireStore.collection('message').doc('message')
-      try {
-        const messageDoc = await messageRef.get()
-        alert(messageDoc.data().message)
-      } catch (e) {
-        alert(e)
-      }
-    }
-  }
+  beforeCreate: function() {
+    /* eslint-disable no-console */
+    this.$fireStore.collection('candidates').onSnapshot(snapshot => {
+      this.items = snapshot.docs.map(doc => ({
+        id: doc.id,
+        name: doc.data().name,
+        voteCount: doc.data().earned_vote
+      }))
+    })
+  },
 }
 </script>
