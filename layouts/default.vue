@@ -24,6 +24,10 @@ html {
   margin: 0;
 }
 
+body {
+  background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/hypnotize.png');
+}
+
 .button--green {
   display: inline-block;
   border-radius: 4px;

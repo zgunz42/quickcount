@@ -1,5 +1,5 @@
 <template>
-  <b-button @click="vote(docId)">Vote</b-button>
+  <b-button block variant="primary" @click="vote(docId)">Vote</b-button>
 </template>
 <script>
 export default {
